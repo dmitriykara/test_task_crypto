@@ -1,0 +1,53 @@
+run:
+  concurrency: 4
+  timeout: 5m
+  tests: true
+  go: '1.23'
+
+output:
+  formats: colored-line-number
+  sort-results: true
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - gofmt
+    - goimports
+    - revive
+    - misspell
+    - prealloc
+    - nlreturn
+
+linters-settings:
+  govet:
+    shadow: true
+  goimports:
+    local-prefixes: github.com/org/project
+  revive:
+    rules:
+      - name: exported
+        arguments:
+          - disableStutteringCheck
+  funlen:
+    lines: 100
+    statements: 50
+  nlreturn:
+    block-size: 1
+    check-short-func: false
+
+
+issues:
+  max-same-issues: 3
+  
+  exclude-use-default: false
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gomnd
